@@ -14,7 +14,7 @@ lat = -30.032829
 lon = -51.230190
 height = 0
 cal = calendar.Calendar()
-venus_tbl = []
+venus_data = []
 
 # A biblioteca dá pau com scale = "local"
 for month in range(1, 13):
@@ -28,7 +28,7 @@ for month in range(1, 13):
             venus = get_body('venus', t, loc)
         altazframe = AltAz(obstime=t, location=loc, pressure=0)
         venusaz = venus.transform_to(altazframe)
-        venus_tbl.append([observation_date, venusaz.alt.degree, venusaz.az.degree])
+        venus_data.append(",".join(observation_date, venusaz.alt.degree, venusaz.az.degree))
 
-venus_csv = pd.DataFrame(venus_tbl)
+venus_csv = pd.DataFrame(venus_data)
 st.line_chart(venus_csv)
