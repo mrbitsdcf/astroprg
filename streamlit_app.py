@@ -31,4 +31,4 @@ for month in range(1, 13):
         venus_data.append(",".join([observation_date, str(venusaz.alt.degree), str(venusaz.az.degree)]))
 
 venus_csv = pd.DataFrame(venus_data)
-st.line_chart(venus_csv)
+st.dataframe(venus_csv)
