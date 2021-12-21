@@ -28,7 +28,7 @@ for month in range(1, 13):
             venus = get_body('venus', t, loc)
         altazframe = AltAz(obstime=t, location=loc, pressure=0)
         venusaz = venus.transform_to(altazframe)
-        venus_data.append(",".join([observation_date, str(venusaz.alt.degree), str(venusaz.az.degree)]))
+        venus_data.append([observation_date, str(venusaz.alt.degree), str(venusaz.az.degree)])
 
 venus_csv = pd.DataFrame(venus_data, columns=['date', 'elevation', 'azimuth'])
 st.dataframe(venus_csv)
