@@ -30,5 +30,5 @@ for month in range(1, 13):
         venusaz = venus.transform_to(altazframe)
         venus_data.append(",".join([observation_date, str(venusaz.alt.degree), str(venusaz.az.degree)]))
 
-venus_csv = pd.DataFrame(venus_data)
+venus_csv = pd.DataFrame(venus_data, columns=['date', 'elevation', 'azimuth'])
 st.dataframe(venus_csv)
