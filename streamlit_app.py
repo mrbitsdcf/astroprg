@@ -7,7 +7,7 @@ from astropy import units as u
 from datetime import datetime, timedelta, date
 import calendar
 import streamlit as st
-import panda as pd
+import pandas as pd
 
 # Porto Alegre
 lat = -30.032829
