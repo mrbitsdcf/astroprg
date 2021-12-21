@@ -6,8 +6,7 @@ from astropy.coordinates import AltAz
 from astropy import units as u
 from datetime import datetime, timedelta, date
 import calendar
-from IPython.display import HTML, display
-import tabulate
+import streamlit as st
 
 # Porto Alegre
 lat = -30.032829
@@ -29,3 +28,5 @@ for month in range(1, 13):
         altazframe = AltAz(obstime=t, location=loc, pressure=0)
         venusaz = venus.transform_to(altazframe)
         venus_tbl.append([observation_date, venusaz.alt.degree, venusaz.az.degree])
+
+st.line_chart(venus_tbl)
