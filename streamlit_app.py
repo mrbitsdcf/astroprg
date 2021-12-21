@@ -7,6 +7,7 @@ from astropy import units as u
 from datetime import datetime, timedelta, date
 import calendar
 import streamlit as st
+import panda as pd
 
 # Porto Alegre
 lat = -30.032829
@@ -29,4 +30,5 @@ for month in range(1, 13):
         venusaz = venus.transform_to(altazframe)
         venus_tbl.append([observation_date, venusaz.alt.degree, venusaz.az.degree])
 
-st.line_chart(venus_tbl)
+venus_csv = pd.DataFrame(venus_tbl)
+st.line_chart(venus_csv)
