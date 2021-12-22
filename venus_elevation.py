@@ -5,15 +5,17 @@ from astropy.coordinates import get_body
 from astropy.coordinates import AltAz
 from astropy import units as u
 from datetime import datetime, timedelta, date
-import calendar
-import streamlit as st
 import pandas as pd
+import plotly.express as px
+import calendar
 
 # Porto Alegre
-lat = -30.032829
-lon = -51.230190
+lat = -23.5558
+lon = -46.6396
+
 height = 0
 cal = calendar.Calendar()
+venus_tbl = []
 venus_date = []
 venus_elev = []
 venus_data = []
@@ -30,14 +32,17 @@ for month in range(1, 13):
             venus = get_body('venus', t, loc)
         altazframe = AltAz(obstime=t, location=loc, pressure=0)
         venusaz = venus.transform_to(altazframe)
+        venus_tbl.append([observation_date, venusaz.alt.degree])
         venus_date.append(observation_date)
-        venus_elev.append(str(venusaz.alt.degree))
-        venus_data.append({
-            "date": observation_date,
-            "elevation": venusaz.alt.degree
-        })
+        venus_elev.append(venusaz.alt.degree)
 
-venus_csv = pd.DataFrame(venus_data)
-venus_csv = venus_csv.rename(columns={'date': 'index'}).set_index('index')
+venus_tbl.sort()
+df = pd.DataFrame(venus_tbl)
 
-st.line_chart(venus_csv)
+fig = px.line(df, x=0, y=1, range_y=[-60, 30], title='Elevation of Venus')
+fig.add_hline(y=0)
+fig.show()
+
+# fig = px.bar(df, x=0, y=1,range_y=[-60,30])
+# fig.update_yaxes(ticklabelposition="inside top", title=None)
+# fig.show()
