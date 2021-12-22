@@ -1,2 +1,3 @@
-astropy==5.0
-jplephem==2.16
+astropy
+jplephem
+plotly
